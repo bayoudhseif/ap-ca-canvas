@@ -17,7 +17,7 @@ function getRandomColor() {
 }
 
 function getRandomShape() {
-  const shapes = ['rectangle', 'circle', 'triangle', 'ellipse'];
+  const shapes = ['rectangle', 'circle', 'triangle'];
   return shapes[Math.floor(Math.random() * shapes.length)];
 }
 

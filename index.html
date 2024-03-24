@@ -2,34 +2,35 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Interactive Canvas Art Dashboard</title>
+<title>Da VinZ - Interactive Canvas</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div id="dashboardContainer">
+<div id="appContainer">
+  <header>
+    <h1>Da VinZ</h1>
+    <p>If Davinci was a Gen Z kid.</p>
+  </header>
   <div id="topBar">
     <select id="shapeSelector">
-      <option value="randomShape">Random Shape</option>
-      <option value="rectangle">Rectangle</option>
-      <option value="circle">Circle</option>
-      <option value="triangle">Triangle</option>
+      <option value="randomShape">🎲 Random Shape</option>
+      <option value="rectangle">▬ Rectangle</option>
+      <option value="circle">◯ Circle</option>
+      <option value="triangle">▲ Triangle</option>
     </select>
     <select id="colorSelector">
-      <option value="randomColor">Random Color</option>
-      <option value="#ff0000">Red</option>
-      <option value="#00ff00">Green</option>
-      <option value="#0000ff">Blue</option>
-      <option value="#ffff00">Yellow</option>
-      <option value="#ff00ff">Magenta</option>
-      <option value="#00ffff">Cyan</option>
+      <option value="randomColor">🎨 Random Color</option>
+      <option value="#ff0000">❤️ Red</option>
+      <option value="#00ff00">💚 Green</option>
+      <option value="#0000ff">💙 Blue</option>
+      <option value="#ffff00">💛 Yellow</option>
+      <option value="#ff00ff">💖 Magenta</option>
+      <option value="#00ffff">💠 Cyan</option>
     </select>
-    <button onclick="addRandomShape()">Add Shape</button>
-    <button onclick="clearCanvas()">Clear</button>
+    <button onclick="addRandomShape()">✚ Add Shape</button>
+    <button onclick="clearCanvas()">🗑 Clear</button>
   </div>
-  
-  
-
   <div id="canvasContainer">
     <canvas id="canvas"></canvas>
   </div>
