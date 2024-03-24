@@ -1,7 +1,6 @@
 const canvas = document.getElementById('canvas');
-const shapeSelector = document.getElementById('shapeSelector'); // Shape selector
-const colorPicker = document.getElementById('colorPicker'); // Color picker
-const randomColorCheckbox = document.getElementById('randomColorCheckbox'); // Random color checkbox
+const shapeSelector = document.getElementById('shapeSelector');
+const colorSelector = document.getElementById('colorSelector');
 const resizeCanvas = () => {
   canvas.width = document.getElementById('canvasContainer').clientWidth;
   canvas.height = document.getElementById('canvasContainer').clientHeight;
@@ -22,7 +21,7 @@ class Shape {
     this.y = y;
     this.size = size;
     this.type = type;
-    this.color = color;
+    this.color = color === 'random' ? getRandomColor() : color;
   }
   draw(ctx) {
     ctx.fillStyle = this.color;
@@ -44,11 +43,11 @@ function drawShapes() {
 }
 
 function addRandomShape() {
-  const size = Math.random() * 80 + 20; // Size between 20 and 100
+  const size = Math.random() * 80 + 20;
   const x = Math.random() * (canvas.width - size);
   const y = Math.random() * (canvas.height - size);
-  const type = shapeSelector.value; // Use selected shape type
-  const color = randomColorCheckbox.checked ? getRandomColor() : colorPicker.value; // Use color picker or random color
+  const type = shapeSelector.value;
+  const color = colorSelector.value;
   const shape = new Shape(x, y, size, type, color);
   shapes.push(shape);
   drawShapes();
