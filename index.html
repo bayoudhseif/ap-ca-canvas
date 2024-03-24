@@ -1,72 +1,22 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Interactive Canvas Art</title>
-<style>
-  body { margin: 0; }
-  canvas { background: #eee; display: block; margin: auto; }
-  #buttonContainer { position: absolute; top: 20px; left: 20px; }
-</style>
+<title>Interactive Canvas Art Dashboard</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<canvas id="canvas"></canvas>
-<div id="buttonContainer">
-  <button onclick="addRandomShape()">Add Shape</button>
-  <button onclick="clearCanvas()">Clear</button>
+
+<div id="dashboardContainer">
+  <div id="topBar">
+    <button onclick="addRandomShape()">Add Shape</button>
+    <button onclick="clearCanvas()">Clear</button>
+  </div>
+  <div id="canvasContainer">
+    <canvas id="canvas"></canvas>
+  </div>
 </div>
 
-<script>
-  const canvas = document.getElementById('canvas');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  const ctx = canvas.getContext('2d');
-
-  let shapes = [];
-
-  function randomColor() {
-    return `hsl(${Math.floor(Math.random() * 360)}, 100%, 50%)`;
-  }
-
-  class Shape {
-    constructor(x, y, size) {
-      this.x = x;
-      this.y = y;
-      this.size = size;
-      this.color = randomColor();
-    }
-    draw(ctx) {
-      ctx.fillStyle = this.color;
-      ctx.beginPath();
-      ctx.rect(this.x, this.y, this.size, this.size);
-      ctx.fill();
-    }
-  }
-
-  function drawShapes() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    shapes.forEach(shape => shape.draw(ctx));
-  }
-
-  function addRandomShape() {
-    const size = Math.random() * 80 + 20; // Size between 20 and 100
-    const x = Math.random() * (canvas.width - size);
-    const y = Math.random() * (canvas.height - size);
-    const shape = new Shape(x, y, size);
-    shapes.push(shape);
-    drawShapes();
-  }
-
-  function clearCanvas() {
-    shapes = [];
-    drawShapes();
-  }
-
-  // Draw some initial shapes
-  for (let i = 0; i < 10; i++) {
-    addRandomShape();
-  }
-</script>
+<script src="script.js"></script>
 </body>
 </html>
