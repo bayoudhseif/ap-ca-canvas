@@ -1,22 +1,24 @@
-body, html {
+bbody, html {
     height: 100%;
     margin: 0;
     font-family: 'Arial', sans-serif;
     background: #fafafa;
-  }
-  
-  #appContainer {
+    overflow: hidden; /* Prevent scrolling */
+}
+
+#appContainer {
     display: flex;
     flex-direction: column;
     height: 100%;
-  }
-  
-  header {
+    overflow: hidden; /* Ensure no overflow */
+}
+
+header {
     text-align: center;
     padding: 20px;
     background-color: #333;
     color: #fff;
-  }
+}
   
   header h1 {
     margin: 0;
@@ -55,10 +57,12 @@ body, html {
     justify-content: center;
     align-items: center;
     padding: 20px;
-  }
-  
-  canvas {
+    overflow: hidden; /* Prevent internal scrolling */
+}
+
+canvas {
     background: #fff;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  }
-  
+    max-height: 100%; /* Ensure canvas does not overflow its container */
+    max-width: 100%;
+}

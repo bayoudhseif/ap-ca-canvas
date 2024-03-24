@@ -2,11 +2,17 @@ const canvas = document.getElementById('canvas');
 const shapeSelector = document.getElementById('shapeSelector'); // Shape selector
 const colorSelector = document.getElementById('colorSelector'); // Color selector
 const resizeCanvas = () => {
-  canvas.width = document.getElementById('canvasContainer').clientWidth;
-  canvas.height = document.getElementById('canvasContainer').clientHeight;
+    const headerHeight = document.querySelector('header').clientHeight;
+    const topBarHeight = document.getElementById('topBar').clientHeight;
+    const availableHeight = window.innerHeight - headerHeight - topBarHeight - 40; // 40px for some padding
+    const availableWidth = document.getElementById('canvasContainer').clientWidth;
+    
+    canvas.width = availableWidth;
+    canvas.height = availableHeight > 0 ? availableHeight : canvas.height; // Prevent negative height
 };
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
+
 
 const ctx = canvas.getContext('2d');
 let shapes = [];
