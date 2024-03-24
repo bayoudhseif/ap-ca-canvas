@@ -1,68 +1,71 @@
-bbody, html {
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+body, html {
     height: 100%;
     margin: 0;
-    font-family: 'Arial', sans-serif;
-    background: #fafafa;
-    overflow: hidden; /* Prevent scrolling */
+    font-family: 'Roboto', sans-serif;
+    background: #333;
+    overflow: hidden;
 }
 
 #appContainer {
     display: flex;
     flex-direction: column;
     height: 100%;
-    overflow: hidden; /* Ensure no overflow */
 }
 
 header {
     text-align: center;
     padding: 20px;
-    background-color: #333;
+    background-color: #1C1C1C; /* Darker shade for header */
     color: #fff;
 }
-  
-  header h1 {
+
+header h1 {
     margin: 0;
-    font-size: 2em;
-  }
-  
-  header p {
-    margin: 10px 0 0;
-    font-style: italic;
-  }
-  
-  #topBar {
+    font-size: 2.5em;
+    font-weight: 500;
+}
+
+header p {
+    margin-top: 5px;
+    font-size: 1em;
+    color: #888; /* Lighter gray for text to maintain readability */
+}
+
+#topBar {
     display: flex;
     justify-content: center;
-    padding: 10px;
-    background-color: #424242;
-  }
-  
-  #topBar select, #topBar button {
-    margin: 0 5px;
-    padding: 10px 15px;
+    padding: 15px;
+    background-color: #2A2A2A; /* Slightly lighter shade for the top bar for contrast */
+}
+
+#topBar select, #topBar button {
+    margin: 0 10px;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     color: #fff;
-    background-color: #007bff;
+    background-color: #424242; /* Gray for buttons and selectors */
     cursor: pointer;
-  }
-  
-  #topBar button:hover, #topBar select:hover {
-    background-color: #0056b3;
-  }
-  
-  #canvasContainer {
+    transition: background-color 0.3s ease;
+}
+
+#topBar select:hover, #topBar button:hover {
+    background-color: #535353; /* Slightly lighter on hover for feedback */
+}
+
+#canvasContainer {
     flex-grow: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
-    overflow: hidden; /* Prevent internal scrolling */
+    background-color: #2A2A2A; /* Slight background color to differentiate from the rest */
 }
 
 canvas {
     background: #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    max-height: 100%; /* Ensure canvas does not overflow its container */
-    max-width: 100%;
+    border: 1px solid #ddd; /* Keeping the canvas light to ensure visibility of drawings */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* Subtle shadow for depth */
 }
