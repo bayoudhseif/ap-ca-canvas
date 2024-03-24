@@ -10,21 +10,24 @@
 <div id="dashboardContainer">
   <div id="topBar">
     <select id="shapeSelector">
+      <option value="randomShape">Random Shape</option>
       <option value="rectangle">Rectangle</option>
       <option value="circle">Circle</option>
+      <option value="triangle">Triangle</option>
     </select>
     <select id="colorSelector">
-      <option value="random">Random Color</option>
-      <option value="#FF0000">Red</option>
-      <option value="#00FF00">Green</option>
-      <option value="#0000FF">Blue</option>
-      <option value="#FFFF00">Yellow</option>
-      <option value="#FF00FF">Magenta</option>
-      <option value="#00FFFF">Cyan</option>
+      <option value="randomColor">Random Color</option>
+      <option value="#ff0000">Red</option>
+      <option value="#00ff00">Green</option>
+      <option value="#0000ff">Blue</option>
+      <option value="#ffff00">Yellow</option>
+      <option value="#ff00ff">Magenta</option>
+      <option value="#00ffff">Cyan</option>
     </select>
     <button onclick="addRandomShape()">Add Shape</button>
     <button onclick="clearCanvas()">Clear</button>
   </div>
+  
   
 
   <div id="canvasContainer">

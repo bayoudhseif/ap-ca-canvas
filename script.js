@@ -1,6 +1,6 @@
 const canvas = document.getElementById('canvas');
-const shapeSelector = document.getElementById('shapeSelector');
-const colorSelector = document.getElementById('colorSelector');
+const shapeSelector = document.getElementById('shapeSelector'); // Shape selector
+const colorSelector = document.getElementById('colorSelector'); // Color selector
 const resizeCanvas = () => {
   canvas.width = document.getElementById('canvasContainer').clientWidth;
   canvas.height = document.getElementById('canvasContainer').clientHeight;
@@ -12,7 +12,13 @@ const ctx = canvas.getContext('2d');
 let shapes = [];
 
 function getRandomColor() {
-  return `hsl(${Math.floor(Math.random() * 360)}, 100%, 50%)`;
+  const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+  return colors[Math.floor(Math.random() * colors.length)];
+}
+
+function getRandomShape() {
+  const shapes = ['rectangle', 'circle', 'triangle', 'ellipse'];
+  return shapes[Math.floor(Math.random() * shapes.length)];
 }
 
 class Shape {
@@ -21,18 +27,29 @@ class Shape {
     this.y = y;
     this.size = size;
     this.type = type;
-    this.color = color === 'random' ? getRandomColor() : color;
+    this.color = color === 'randomColor' ? getRandomColor() : color;
   }
   draw(ctx) {
     ctx.fillStyle = this.color;
-    if (this.type === 'rectangle') {
-      ctx.beginPath();
-      ctx.rect(this.x, this.y, this.size, this.size);
-      ctx.fill();
-    } else if (this.type === 'circle') {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size / 2, 0, 2 * Math.PI);
-      ctx.fill();
+    switch (this.type) {
+      case 'rectangle':
+        ctx.beginPath();
+        ctx.rect(this.x, this.y, this.size, this.size);
+        ctx.fill();
+        break;
+      case 'circle':
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size / 2, 0, 2 * Math.PI);
+        ctx.fill();
+        break;
+      case 'triangle':
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(this.x + this.size / 2, this.y + this.size);
+        ctx.lineTo(this.x - this.size / 2, this.y + this.size);
+        ctx.closePath();
+        ctx.fill();
+        break;
     }
   }
 }
@@ -43,10 +60,10 @@ function drawShapes() {
 }
 
 function addRandomShape() {
-  const size = Math.random() * 80 + 20;
+  const size = Math.random() * 80 + 20; // Size between 20 and 100
   const x = Math.random() * (canvas.width - size);
   const y = Math.random() * (canvas.height - size);
-  const type = shapeSelector.value;
+  const type = shapeSelector.value === 'randomShape' ? getRandomShape() : shapeSelector.value;
   const color = colorSelector.value;
   const shape = new Shape(x, y, size, type, color);
   shapes.push(shape);
