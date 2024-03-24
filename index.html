@@ -7,11 +7,18 @@
 </head>
 <body>
 
+  
+
 <div id="dashboardContainer">
   <div id="topBar">
+    <select id="shapeSelector">
+      <option value="rectangle">Rectangle</option>
+      <option value="circle">Circle</option>
+    </select>
     <button onclick="addRandomShape()">Add Shape</button>
     <button onclick="clearCanvas()">Clear</button>
   </div>
+  
   <div id="canvasContainer">
     <canvas id="canvas"></canvas>
   </div>
