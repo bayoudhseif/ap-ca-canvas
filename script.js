@@ -1,5 +1,6 @@
 const canvas = document.getElementById('canvas');
 const shapeSelector = document.getElementById('shapeSelector'); // Shape selector
+const colorPicker = document.getElementById('colorPicker'); // Color picker
 const resizeCanvas = () => {
   canvas.width = document.getElementById('canvasContainer').clientWidth;
   canvas.height = document.getElementById('canvasContainer').clientHeight;
@@ -10,20 +11,16 @@ resizeCanvas();
 const ctx = canvas.getContext('2d');
 let shapes = [];
 
-function randomColor() {
-  return `hsl(${Math.floor(Math.random() * 360)}, 100%, 50%)`;
-}
-
 class Shape {
-  constructor(x, y, size, type) {
+  constructor(x, y, size, type, color) {
     this.x = x;
     this.y = y;
     this.size = size;
-    this.color = randomColor();
     this.type = type;
+    this.color = color; // Use specified color
   }
   draw(ctx) {
-    ctx.fillStyle = this.color;
+    ctx.fillStyle = this.color; // Use the shape's color
     if (this.type === 'rectangle') {
       ctx.beginPath();
       ctx.rect(this.x, this.y, this.size, this.size);
@@ -46,7 +43,8 @@ function addRandomShape() {
   const x = Math.random() * (canvas.width - size);
   const y = Math.random() * (canvas.height - size);
   const type = shapeSelector.value; // Use selected shape type
-  const shape = new Shape(x, y, size, type);
+  const color = colorPicker.value; // Use selected color
+  const shape = new Shape(x, y, size, type, color);
   shapes.push(shape);
   drawShapes();
 }
@@ -56,7 +54,7 @@ function clearCanvas() {
   drawShapes();
 }
 
-// Initial shapes
+// Initial shapes with default settings
 for (let i = 0; i < 10; i++) {
   addRandomShape();
 }
