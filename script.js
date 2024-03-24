@@ -28,77 +28,68 @@ function getRandomShape() {
 }
 
 class Shape {
-    constructor(x, y, size, type, color) {
-        this.x = x;
-        this.y = y;
-        this.size = size;
-        this.type = type;
-        this.color = color === 'randomColor' ? getRandomColor() : color;
-    }
-    
-    draw(ctx, mouseX, mouseY) {
-        // Calculate shadow direction based on mouse position
-        const offsetX = this.x - mouseX;
-        const offsetY = this.y - mouseY;
-        const distance = Math.sqrt(offsetX * offsetX + offsetY * offsetY);
-        const shadowLength = Math.min(distance / 5, 50); // Limit shadow length
-        const shadowDirectionX = offsetX / distance;
-        const shadowDirectionY = offsetY / distance;
-        
-        // Draw shadow
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
-        ctx.beginPath();
-        switch (this.type) {
-            case 'rectangle':
-                ctx.rect(this.x + shadowDirectionX * shadowLength, this.y + shadowDirectionY * shadowLength, this.size, this.size);
-                break;
-            case 'circle':
-                ctx.arc(this.x + shadowDirectionX * shadowLength, this.y + shadowDirectionY * shadowLength, this.size / 2, 0, 2 * Math.PI);
-                break;
-            case 'triangle':
-                ctx.moveTo(this.x + shadowDirectionX * shadowLength, this.y + shadowDirectionY * shadowLength);
-                ctx.lineTo(this.x + this.size / 2 + shadowDirectionX * shadowLength, this.y + this.size + shadowDirectionY * shadowLength);
-                ctx.lineTo(this.x - this.size / 2 + shadowDirectionX * shadowLength, this.y + this.size + shadowDirectionY * shadowLength);
-                ctx.closePath();
-                break;
-        }
-        ctx.fill();
+  constructor(x, y, size, type, color) {
+      this.x = x;
+      this.y = y;
+      this.size = size;
+      this.type = type;
+      this.color = color === 'randomColor' ? getRandomColor() : color;
+  }
+  
+  draw(ctx, mouseX, mouseY) {
+      // Calculate shadow direction based on mouse position
+      const offsetX = this.x - mouseX;
+      const offsetY = this.y - mouseY;
+      const distance = Math.sqrt(offsetX * offsetX + offsetY * offsetY);
+      const shadowLength = Math.min(distance / 5, 50); // Limit shadow length
+      const shadowDirectionX = offsetX / distance;
+      const shadowDirectionY = offsetY / distance;
 
-        // Draw shape
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        switch (this.type) {
-            case 'rectangle':
-                ctx.rect(this.x, this.y, this.size, this.size);
-                break;
-            case 'circle':
-                ctx.arc(this.x, this.y, this.size / 2, 0, 2 * Math.PI);
-                break;
-            case 'triangle':
-                ctx.moveTo(this.x, this.y);
-                ctx.lineTo(this.x + this.size / 2, this.y + this.size);
-                ctx.lineTo(this.x - this.size / 2, this.y + this.size);
-                ctx.closePath();
-                break;
-        }
-        ctx.fill();
-    }
+      // Calculate light intensity based on distance from mouse pointer
+      const intensity = Math.min(1, 1 - distance / 750);
+      const r = parseInt(this.color.slice(1, 3), 16);
+      const g = parseInt(this.color.slice(3, 5), 16);
+      const b = parseInt(this.color.slice(5, 7), 16);
+      const lightColor = `rgb(${Math.round(r * intensity)}, ${Math.round(g * intensity)}, ${Math.round(b * intensity)})`;
 
-    // Method to check if a point is inside the shape
-    contains(point) {
-        switch (this.type) {
-            case 'rectangle':
-                return point.x >= this.x && point.x <= this.x + this.size &&
-                        point.y >= this.y && point.y <= this.y + this.size;
-            case 'circle':
-                const distance = Math.sqrt((point.x - this.x) ** 2 + (point.y - this.y) ** 2);
-                return distance <= this.size / 2;
-            case 'triangle':
-                // Simple approach for triangle hit detection; more complex math required for accuracy
-                return point.x >= this.x - this.size / 2 && point.x <= this.x + this.size / 2 &&
-                        point.y >= this.y && point.y <= this.y + this.size;
-        }
-    }
+      // Draw shadow
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+      ctx.beginPath();
+      switch (this.type) {
+          case 'rectangle':
+              ctx.rect(this.x + shadowDirectionX * shadowLength, this.y + shadowDirectionY * shadowLength, this.size, this.size);
+              break;
+          case 'circle':
+              ctx.arc(this.x + shadowDirectionX * shadowLength, this.y + shadowDirectionY * shadowLength, this.size / 2, 0, 2 * Math.PI);
+              break;
+          case 'triangle':
+              ctx.moveTo(this.x + shadowDirectionX * shadowLength, this.y + shadowDirectionY * shadowLength);
+              ctx.lineTo(this.x + this.size / 2 + shadowDirectionX * shadowLength, this.y + this.size + shadowDirectionY * shadowLength);
+              ctx.lineTo(this.x - this.size / 2 + shadowDirectionX * shadowLength, this.y + this.size + shadowDirectionY * shadowLength);
+              ctx.closePath();
+              break;
+      }
+      ctx.fill();
+
+      // Draw shape with light color
+      ctx.fillStyle = lightColor;
+      ctx.beginPath();
+      switch (this.type) {
+          case 'rectangle':
+              ctx.rect(this.x, this.y, this.size, this.size);
+              break;
+          case 'circle':
+              ctx.arc(this.x, this.y, this.size / 2, 0, 2 * Math.PI);
+              break;
+          case 'triangle':
+              ctx.moveTo(this.x, this.y);
+              ctx.lineTo(this.x + this.size / 2, this.y + this.size);
+              ctx.lineTo(this.x - this.size / 2, this.y + this.size);
+              ctx.closePath();
+              break;
+      }
+      ctx.fill();
+  }
 }
 
 
